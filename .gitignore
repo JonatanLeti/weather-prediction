@@ -1,0 +1,15 @@
+.classpath
+.settings
+.project
+.metadata
+target/
+test-output
+/.externalToolBuilders
+.idea
+*.iml
+artifact-id
+.DS_Store
+*.pem
+*/.eclipse-pmd
+/bin/
+/atalaya-front/src/main/resources/conf/env/sensitive.conf
