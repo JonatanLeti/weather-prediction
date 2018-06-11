@@ -1,4 +1,4 @@
-package com.ml.weather.prediction.main;
+package com.ml.weather.prediction.main.module;
 
 import com.google.inject.servlet.ServletModule;
 import com.ml.weather.prediction.front.route.WeatherPredictionRouter;

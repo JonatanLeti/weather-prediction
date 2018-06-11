@@ -1,7 +1,8 @@
-package com.ml.weather.prediction.main;
+package com.ml.weather.prediction.main.module;
 
 import com.google.inject.*;
 import com.google.inject.name.Names;
+import com.ml.weather.prediction.main.Main;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
