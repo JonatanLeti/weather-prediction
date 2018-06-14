@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="ProjectModuleManager">
-    <modules>
-      <module fileurl="file://$PROJECT_DIR$/wheater-prediction-db/weather-prediction-db.iml" filepath="$PROJECT_DIR$/wheater-prediction-db/weather-prediction-db.iml" />
-      <module fileurl="file://$PROJECT_DIR$/wheater-prediction-domain/weather-prediction-domain.iml" filepath="$PROJECT_DIR$/wheater-prediction-domain/weather-prediction-domain.iml" />
-    </modules>
-  </component>
-</project>

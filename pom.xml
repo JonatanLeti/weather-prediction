@@ -57,8 +57,7 @@
         <!-- test libraries dependency versions -->
         <testng.version>6.14.3</testng.version>
         <mockito-all.version>1.10.19</mockito-all.version>
-        <json-path.version>2.4.0</json-path.version>
-       
+
        <!-- javascript libraries dependency versions -->
         <lodash.version>4.17.10</lodash.version>
         <jsonsmart.version>2.3</jsonsmart.version>
@@ -69,7 +68,10 @@
         <javax.version>3.1.0</javax.version>
         <javax.ws.version>2.0</javax.ws.version>
         <jersey.version>1.19.4</jersey.version>
-
+        <spark-core.version>2.7.2</spark-core.version>
+        <project.version>1.0.0</project.version>
+        <h2.version>1.4.197</h2.version>
+        <commons-collection.version>4.0</commons-collection.version>
     </properties>
     <modules>
         <module>weather-prediction-main</module>
@@ -100,13 +102,6 @@
                 <groupId>com.ml.weather.prediction</groupId>
                 <artifactId>weather-prediction-service</artifactId>
                 <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.ml.weather.prediction</groupId>
-                <artifactId>weather-prediction-service</artifactId>
-                <version>${project.version}</version>
-                <type>test-jar</type>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.ml.weather.prediction</groupId>
@@ -196,6 +191,11 @@
                 <version>${commons-math.version}</version>
             </dependency>
             <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-collections4</artifactId>
+                <version>${commons-collection.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.apache.httpcomponents</groupId>
                 <artifactId>httpclient</artifactId>
                 <version>${httpclient.version}</version>
@@ -223,6 +223,17 @@
                 <artifactId>gson</artifactId>
                 <version>${gson.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.sparkjava</groupId>
+                <artifactId>spark-core</artifactId>
+                <version>${spark-core.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>${h2.version}</version>
+            </dependency>
 
             <!-- test -->
             <dependency>
@@ -247,12 +258,6 @@
                 <version>${mockito-all.version}</version>
                 <scope>test</scope>
             </dependency>
-            <dependency>
-                <groupId>com.jayway.jsonpath</groupId>
-                <artifactId>json-path</artifactId>
-                <version>${json-path.version}</version>
-                <scope>test</scope>
-            </dependency>
 
             <!-- javascript libraries -->
             <dependency>
@@ -267,4 +272,85 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+    <build>
+        <resources>
+             <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <showWarnings>true</showWarnings>
+                    <showDeprecation>true</showDeprecation>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>${maven-release-plugin.version}</version>
+                <configuration>
+                    <tagNameFormat>@{project.version}</tagNameFormat>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>de.thetaphi</groupId>
+                <artifactId>forbiddenapis</artifactId>
+                <version>${forbiddenapis.version}</version>
+                <configuration>
+                    <!-- if the used Java version is too new, don't fail, just do nothing: -->
+                    <failOnUnsupportedJava>false</failOnUnsupportedJava>
+                    <bundledSignatures>
+                        <!-- This will automatically choose the right signatures based on 'maven.compiler.target': -->
+                        <bundledSignature>jdk-unsafe</bundledSignature>
+                        <bundledSignature>jdk-deprecated</bundledSignature>
+                        <!-- disallow undocumented classes like sun.misc.Unsafe: -->
+                        <bundledSignature>jdk-non-portable</bundledSignature>
+                    </bundledSignatures>
+                    <!-- <signaturesFiles> -->
+                    <!-- <signaturesFile>./rel/path/to/signatures.txt</signaturesFile> -->
+                    <!-- </signaturesFiles> -->
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>check</goal>
+                            <goal>testCheck</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>${maven-jar-plugin.version}</version>
+                <configuration>
+                    <excludes>
+                    </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+                <inherited>false</inherited>
+                <version>${versions-maven-plugin.version}</version>
+                <configuration>
+                    <outputFile>outdated-dependencies.txt</outputFile>
+                    <rulesUri>file:///${project.basedir}/maven-version-rules.xml</rulesUri>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>

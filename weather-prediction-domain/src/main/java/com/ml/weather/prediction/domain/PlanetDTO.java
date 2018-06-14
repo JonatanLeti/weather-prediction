@@ -24,15 +24,15 @@ public class PlanetDTO {
      */
     public Point2D getPositionInDay(double day){
         //add precision with 3 decimal
-        double x = Math.cos(Math.toRadians(angularVelocity) * day) * sunDistance;
-        double y = Math.sin(Math.toRadians(angularVelocity) * day) * sunDistance;
+        double x = Math.sin(Math.toRadians(angularVelocity) * day) * sunDistance;
+        double y = Math.cos(Math.toRadians(angularVelocity) * day) * sunDistance;
         return new Point2D.Double(x, y);
     }
 
     public Point2D getPositionInDayAprox(double day){
         //add precision with 3 decimal
-        double x = Precision.round(Math.cos(Math.toRadians(angularVelocity) * day) * sunDistance, 3);
-        double y = Precision.round(Math.sin(Math.toRadians(angularVelocity) * day) * sunDistance, 3);
+        double x = Precision.round(Math.sin(Math.toRadians(angularVelocity) * day) * sunDistance, 2);
+        double y = Precision.round(Math.cos(Math.toRadians(angularVelocity) * day) * sunDistance, 2);
         return new Point2D.Double(x, y);
     }
 }

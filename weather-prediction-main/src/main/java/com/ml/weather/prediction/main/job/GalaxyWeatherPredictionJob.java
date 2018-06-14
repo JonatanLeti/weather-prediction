@@ -1,53 +1,76 @@
 package com.ml.weather.prediction.main.job;
 
-import com.ml.weather.prediction.domain.PlanetDTO;
-import com.ml.weather.prediction.services.GalaxyWeatherHelper;
+import com.ml.weather.prediction.domain.GalaxyWeatherDTO;
+import com.ml.weather.prediction.domain.WeatherStatus;
+import com.ml.weather.prediction.services.GalaxyWeatherService;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.time.StopWatch;
+import org.jooq.lambda.Seq;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
-import java.awt.geom.Point2D;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
+@Slf4j
 @Singleton
-public class GalaxyWeatherPredictionJob {
+public class GalaxyWeatherPredictionJob extends Thread{
 
-    private final GalaxyWeatherHelper galaxyWeatherHelper;
+    private final GalaxyWeatherService galaxyWeatherService;
     private final int yearsToPredict;
     private final int daysPerYear;
-    private final int precisionInPositionScale;
 
     @Inject
-    public GalaxyWeatherPredictionJob(GalaxyWeatherHelper galaxyWeatherHelper,
+    public GalaxyWeatherPredictionJob(GalaxyWeatherService galaxyWeatherService,
                                       @Named("job.galaxy.weather.prediction.in.years") int yearsToPredict,
-                                      @Named("job.galaxy.weather.prediction.days.per.year") int daysPerYear,
-                                      @Named("precision.in.position.scale") int precisionInPositionScale) {
+                                      @Named("job.galaxy.weather.prediction.days.per.year") int daysPerYear) {
 
-        this.galaxyWeatherHelper = galaxyWeatherHelper;
+        this.galaxyWeatherService = galaxyWeatherService;
         this.yearsToPredict = yearsToPredict;
         this.daysPerYear = daysPerYear;
-        this.precisionInPositionScale = precisionInPositionScale;
     }
 
+    @Override
     public void run() {
+        List<GalaxyWeatherDTO> periodWeatherList = new ArrayList<>();
         int totalDaysToCalculate = yearsToPredict * daysPerYear;
 
-        final PlanetDTO FERENGI = new PlanetDTO(500, -1);
-        final PlanetDTO VULCANO = new PlanetDTO(1000, 5);
-        final PlanetDTO BETASOIDE = new PlanetDTO(2000, -3);
-        final Point2D sunPosition = new Point2D.Double(0, 0);
+        log.info("START weather prediction for next {} year - ({} days)", yearsToPredict, totalDaysToCalculate);
+        StopWatch time = new StopWatch();
+        time.start();
 
-        for (int day = 0; day <= totalDaysToCalculate; day++) {
-            Point2D ferengiPosition = FERENGI.getPositionInDayAprox(day);
-            Point2D vulcanoPosition = VULCANO.getPositionInDayAprox(day);
-            Point2D betasoide = BETASOIDE.getPositionInDayAprox(day);
-
-            boolean planetsAreAligned = galaxyWeatherHelper.pointsAreAlineated(ferengiPosition, vulcanoPosition, betasoide);
-            boolean twoPlanetsAreAlignedWithSun = galaxyWeatherHelper.pointsAreAlineated(sunPosition, ferengiPosition, vulcanoPosition);
-            boolean sunIsInsidePlanetsArea = galaxyWeatherHelper.pointIsInsideTriangle(ferengiPosition, vulcanoPosition, betasoide, sunPosition);
-
-
+        for (int day = 0; day < totalDaysToCalculate; day++) {
+            GalaxyWeatherDTO galaxyWeatherDTO = this.galaxyWeatherService.calculateWeatherInDay(day);
+            periodWeatherList.add(galaxyWeatherDTO);
         }
-    }
 
+        //filtra la lista por clima 'LLuvia'
+        //ordeno por area del triangulo
+        //reverse para ordenar de mayor a menor
+        //tomo el primero (que es el de mayor valor)
+        Seq.seq(periodWeatherList)
+                .filter(Objects::nonNull)
+                .filter(p -> WeatherStatus.RAIN.equals(p.getWeatherStatus()))
+                .sorted(GalaxyWeatherDTO::getPlanetsTriangleArea)
+                .reverse()
+                .findFirst()
+                .ifPresent(galaxyWeatherMaxRain -> galaxyWeatherMaxRain.setWeatherStatus(WeatherStatus.HEAVY_RAIN));
+
+        Seq.seq(periodWeatherList).forEach(p -> {
+            try{
+                boolean saved = this.galaxyWeatherService.saveNewGalaxyWeatherDTO(p);
+                log.info("Saved weather {} RESULT: {}", p, saved);
+            }catch (Exception e){
+                log.error("An error ocurred trying to save weather {}", p.toString(), e);
+                // TODO: notify?
+            }
+        });
+
+        time.stop();
+        log.info("END weather prediction - TOTAL TIME ms {}", time.getTime(TimeUnit.MILLISECONDS));
+    }
 
 }

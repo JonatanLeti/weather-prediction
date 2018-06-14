@@ -21,6 +21,8 @@ public class GalaxyWeatherDTO {
     private double yPositionVulcano;
     private double xPositionBetasoide;
     private double yPositionBetasoide;
+
+    private double planetsTriangleArea;
     private WeatherStatus weatherStatus;
     private PlanetsPosition planetsPosition;
 }

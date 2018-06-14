@@ -6,11 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="weather-prediction-db" />
+        <module name="weather-prediction-domain" />
         <module name="weather-prediction-front" />
         <module name="weather-prediction-main" />
         <module name="weather-prediction-service" />
-        <module name="wheater-prediction-db" />
-        <module name="wheater-prediction-domain" />
       </profile>
     </annotationProcessing>
   </component>

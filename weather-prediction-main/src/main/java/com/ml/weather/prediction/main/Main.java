@@ -4,31 +4,26 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.servlet.GuiceFilter;
 import com.google.inject.servlet.GuiceServletContextListener;
+import com.ml.weather.prediction.main.job.GalaxyWeatherPredictionJob;
 import com.ml.weather.prediction.main.module.MainModule;
 import com.ml.weather.prediction.main.module.RouterModule;
-import org.eclipse.jetty.server.Handler;
+import lombok.extern.slf4j.Slf4j;
 import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.server.handler.HandlerList;
-import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.servlet.DefaultServlet;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 
+@Slf4j
 public class Main {
 
     private static final int DEFAULT_PORT = 9290;
-    private static final String INDEX_PAGE = "index.html";
 
     public Main() {
     }
 
     public static void main(String[] args) throws Exception {
         Server server = new Server(DEFAULT_PORT);
-        ResourceHandler resource_handler = new ResourceHandler();
 
         final Injector injector = Guice.createInjector(new MainModule(), new RouterModule());
-
-        resource_handler.setDirectoriesListed(true);
-        resource_handler.setWelcomeFiles(new String[]{INDEX_PAGE});
 
         ServletContextHandler sch = new ServletContextHandler(server, "/");
 
@@ -42,11 +37,12 @@ public class Main {
         sch.addFilter(GuiceFilter.class, "/*", null);
         sch.addServlet(DefaultServlet.class, "/");
 
-        HandlerList handlers = new HandlerList();
-        handlers.setHandlers(new Handler[]{resource_handler, sch});
-        server.setHandler(handlers);
-
         server.start();
+
+        GalaxyWeatherPredictionJob galaxyWeatherPredictionJob = injector.getInstance(GalaxyWeatherPredictionJob.class);
+        galaxyWeatherPredictionJob.start();
+        galaxyWeatherPredictionJob.join();
+
         server.join();
     }
 }

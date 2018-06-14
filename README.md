@@ -30,3 +30,20 @@ Para poder utilizar el sistema como un servicio a las otras civilizaciones, los 
 ~~~~
 Ej: GET → http://....../clima?dia=566 → Respuesta: {“dia”:566, “clima”:”lluvia”}
 ~~~~  
+
+## URLs de acceso
+
+~~~~
+    http://asigned-host/services/weather?day=256
+    
+    http://asigned-host/services/weather?day=256&forceRecalculate=true
+    
+    http://asigned-host/services/period?status=
+                                                  RAIN
+                                                  HEAVY_RAIN
+                                                  DROUGHT
+                                                  OPTIMUM
+                                                  UNKNOWN
+                                                  
+    http://asigned-host/services/all-period                                                  
+~~~~  

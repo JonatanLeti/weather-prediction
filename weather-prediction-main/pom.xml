@@ -50,10 +50,7 @@
             <groupId>org.jooq</groupId>
             <artifactId>jool-java-8</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.ml.weather.prediction</groupId>
-            <artifactId>weather-prediction-front</artifactId>
-        </dependency>
+
         <dependency>
             <groupId>com.sun.jersey</groupId>
             <artifactId>jersey-bundle</artifactId>
@@ -65,6 +62,14 @@
         <dependency>
             <groupId>com.sun.jersey</groupId>
             <artifactId>jersey-servlet</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.ml.weather.prediction</groupId>
+            <artifactId>weather-prediction-front</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.ml.weather.prediction</groupId>
+            <artifactId>weather-prediction-domain</artifactId>
         </dependency>
     </dependencies>
 </project>

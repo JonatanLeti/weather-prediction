@@ -1,7 +1,6 @@
 package com.ml.weather.prediction.services;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import org.apache.commons.math3.util.Precision;
 
 import java.awt.geom.Point2D;
 
@@ -9,12 +8,11 @@ import java.lang.Math;
 
 public class GalaxyWeatherHelper {
 
-    public final Gson GSON = new GsonBuilder().create();
-
     public double calculateDistance(Point2D a, Point2D b) {
-        double dx = a.getX() - b.getX();
-        double dy = a.getY() - b.getY();
-        return Math.sqrt(dx * dx + dy * dy);
+        return Math.sqrt(
+                Math.pow((a.getX() - b.getX()), 2) +
+                Math.pow((a.getY() - b.getY()), 2)
+        );
     }
 
     /**
@@ -30,19 +28,29 @@ public class GalaxyWeatherHelper {
         return Math.sqrt(shape * (shape - ab) * (shape - bc) * (shape - ca));
     }
 
+    @Deprecated
     public boolean pointsAreAlineated(Point2D a, Point2D b, Point2D c) {
-        return calculateTriangleArea(a, b, c) == 0;
+        return calculateTriangleArea(a, b, c) < 1;
+    }
+
+    @Deprecated
+    public boolean pointAreAlineatedSimply(Point2D a, Point2D b, Point2D c){
+        return calculateSimpleTriangleArea(a, b, c) < 1;
     }
 
     public double calculateSimpleTriangleArea(Point2D a, Point2D b, Point2D c) {
-        return Math.abs(
-                    (
+        return
+                Math.abs(
+                        Precision.round(
+                                (
                         a.getX() * (b.getY() - c.getY()) +
                         b.getX() * (c.getY() - a.getY()) +
                         c.getX() * (a.getY() - b.getY())
-                    ) / 2.0
+                    ) / 2, 2)
         );
     }
+
+
 
     /**
      * @link http://www.crazyforcode.com/check-point-lies-triangle/
@@ -55,5 +63,19 @@ public class GalaxyWeatherHelper {
         double ABP = calculateSimpleTriangleArea(a, b, p);
 
         return (ABC == PBC + APC + ABP);
+    }
+
+    /**
+     * @link https://www.geeksforgeeks.org/program-find-slope-line/
+     */
+    public boolean isAlignedByDistanceAndAngleVel(double d1, double d2, double d3, double av1, double av2, double av3, double day){
+
+        // si la pendiente entre tres puntos es 0, estan alineados?
+        double pendiente =
+                d1 * d2 * Math.sin((av2 - av1) * Precision.round(day, 2)) +
+                d2 * d3 * Math.sin((av3 - av2) * Precision.round(day, 2)) +
+                d3 * d1 * Math.sin((av1 - av3) * Precision.round(day, 2));
+
+        return pendiente < 1;
     }
 }
