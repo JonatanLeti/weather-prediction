@@ -1,9 +1,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.ml.weather.prediction</groupId>
-    <artifactId>weather-prediction</artifactId>
+    <artifactId>weather-prediction-jl-2018</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <name>weather-prediction</name>
+    <name>weather-prediction-jl-2018</name>
     <packaging>pom</packaging>
     <description>Weather prediction for external galaxy</description>
 
@@ -54,10 +54,6 @@
         <!-- test libraries dependency versions -->
         <testng.version>6.14.3</testng.version>
         <mockito-all.version>1.10.19</mockito-all.version>
-
-       <!-- javascript libraries dependency versions -->
-        <lodash.version>4.17.10</lodash.version>
-        <jsonsmart.version>2.3</jsonsmart.version>
 
         <jetty.version>9.4.11.v20180605</jetty.version>
         <javax.version>3.1.0</javax.version>
@@ -191,17 +187,6 @@
                 <artifactId>commons-collections4</artifactId>
                 <version>${commons-collection.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.apache.httpcomponents</groupId>
-                <artifactId>httpclient</artifactId>
-                <version>${httpclient.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>commons-logging</groupId>
-                        <artifactId>commons-logging</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
 
             <dependency>
                 <groupId>org.eclipse.jetty</groupId>
@@ -263,18 +248,6 @@
                 <artifactId>mockito-all</artifactId>
                 <version>${mockito-all.version}</version>
                 <scope>test</scope>
-            </dependency>
-
-            <!-- javascript libraries -->
-            <dependency>
-                <groupId>org.webjars.npm</groupId>
-                <artifactId>lodash</artifactId>
-                <version>${lodash.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.squareup.okhttp3</groupId>
-                <artifactId>okhttp</artifactId>
-                <version>${okhttp.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
