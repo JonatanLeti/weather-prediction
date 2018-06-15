@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0c458b39-b6ce-421b-a89f-31f7127f01ca" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/weather-prediction-db/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/weather-prediction-db/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/weather-prediction-domain/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/weather-prediction-domain/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/weather-prediction-front/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/weather-prediction-front/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/weather-prediction-main/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/weather-prediction-main/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/weather-prediction-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/weather-prediction-service/pom.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/weather-prediction-service/target/" />
@@ -78,8 +72,8 @@
       <file leaf-file-name="pom.xml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="436">
-              <caret line="56" column="8" selection-start-line="56" selection-start-column="8" selection-end-line="56" selection-end-column="8" />
+            <state relative-caret-position="455">
+              <caret line="52" column="54" selection-start-line="52" selection-start-column="54" selection-end-line="52" selection-end-column="54" />
             </state>
           </provider>
         </entry>
@@ -125,6 +119,7 @@
       <find>assembly</find>
       <find>appna</find>
       <find>http</find>
+      <find>json</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -294,7 +289,7 @@
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.29285714" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.36666667" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.36666667" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19542067" />
@@ -302,7 +297,7 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
       <window_info anchor="right" id="Theme Preview" order="3" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.22708334" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.22708334" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Coverage" order="4" side_tool="true" weight="0.3297568" />
@@ -730,8 +725,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="436">
-          <caret line="56" column="8" selection-start-line="56" selection-start-column="8" selection-end-line="56" selection-end-column="8" />
+        <state relative-caret-position="455">
+          <caret line="52" column="54" selection-start-line="52" selection-start-column="54" selection-end-line="52" selection-end-column="54" />
         </state>
       </provider>
     </entry>
