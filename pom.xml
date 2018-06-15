@@ -38,9 +38,6 @@
         <maven-surefire-plugin.version>2.20.1</maven-surefire-plugin.version>
         <maven-pmd-plugin.version>3.8</maven-pmd-plugin.version>
         <maven-jxr-plugin.version>2.5</maven-jxr-plugin.version>
-        <jacoco-maven-plugin.version>0.7.9</jacoco-maven-plugin.version>
-        <forbiddenapis.version>2.5</forbiddenapis.version>
-        <owasp.version>3.0.2</owasp.version>
 
         <!-- general dependency versions -->
         <slf4j.version>1.7.25</slf4j.version>
@@ -61,8 +58,6 @@
        <!-- javascript libraries dependency versions -->
         <lodash.version>4.17.10</lodash.version>
         <jsonsmart.version>2.3</jsonsmart.version>
-        <xerces.version>2.11.0</xerces.version>
-        <lz4.version>1.3</lz4.version>
 
         <jetty.version>9.4.11.v20180605</jetty.version>
         <javax.version>3.1.0</javax.version>
@@ -316,33 +311,6 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>de.thetaphi</groupId>
-                <artifactId>forbiddenapis</artifactId>
-                <version>${forbiddenapis.version}</version>
-                <configuration>
-                    <!-- if the used Java version is too new, don't fail, just do nothing: -->
-                    <failOnUnsupportedJava>false</failOnUnsupportedJava>
-                    <bundledSignatures>
-                        <!-- This will automatically choose the right signatures based on 'maven.compiler.target': -->
-                        <bundledSignature>jdk-unsafe</bundledSignature>
-                        <bundledSignature>jdk-deprecated</bundledSignature>
-                        <!-- disallow undocumented classes like sun.misc.Unsafe: -->
-                        <bundledSignature>jdk-non-portable</bundledSignature>
-                    </bundledSignatures>
-                    <!-- <signaturesFiles> -->
-                    <!-- <signaturesFile>./rel/path/to/signatures.txt</signaturesFile> -->
-                    <!-- </signaturesFiles> -->
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>check</goal>
-                            <goal>testCheck</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>${maven-jar-plugin.version}</version>
@@ -352,13 +320,38 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>versions-maven-plugin</artifactId>
-                <inherited>false</inherited>
-                <version>${versions-maven-plugin.version}</version>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
                 <configuration>
-                    <outputFile>outdated-dependencies.txt</outputFile>
-                    <rulesUri>file:///${project.basedir}/maven-version-rules.xml</rulesUri>
+                    <descriptorRefs>
+                        <!-- This tells Maven to include all dependencies -->
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.ml.weather.prediction.main.Main</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.heroku.sdk</groupId>
+                <artifactId>heroku-maven-plugin</artifactId>
+                <version>0.4.4</version>
+                <configuration>
+                    <jdkVersion>1.8</jdkVersion>
+                    <appName>${artifactId}</appName>
+                    <processTypes>
+                        <web>java -Dserver.port=$PORT -jar ./target/${artifactId}-${version}-jar-with-dependencies.jar
+                        </web>
+                    </processTypes>
                 </configuration>
             </plugin>
         </plugins>
