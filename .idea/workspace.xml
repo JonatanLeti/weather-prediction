@@ -26,11 +26,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="319" column="74" selection-start-line="319" selection-start-column="74" selection-end-line="319" selection-end-column="74" />
+            <state relative-caret-position="527">
+              <caret line="278" column="21" selection-start-line="278" selection-start-column="21" selection-end-line="278" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -53,11 +53,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Procfile" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Procfile" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Procfile">
           <provider selected="true" editor-type-id="text-editor">
             <state>
-              <caret column="60" selection-start-column="60" selection-end-column="60" />
+              <caret column="36" selection-start-column="36" selection-end-column="36" />
             </state>
           </provider>
         </entry>
@@ -88,6 +88,8 @@
       <find>json</find>
       <find>httpclient</find>
       <find>fit</find>
+      <find>maven-compiler-plugin.version</find>
+      <find>maven</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -111,8 +113,8 @@
         <option value="$PROJECT_DIR$/weather-prediction-front/pom.xml" />
         <option value="$PROJECT_DIR$/weather-prediction-db/pom.xml" />
         <option value="$PROJECT_DIR$/weather-prediction-domain/pom.xml" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/Procfile" />
+        <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
   </component>
@@ -137,11 +139,6 @@
             <path>
               <item name="weather-prediction" type="b2602c69:ProjectViewProjectNode" />
               <item name="weather-prediction" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="weather-prediction" type="b2602c69:ProjectViewProjectNode" />
-              <item name="weather-prediction" type="462c0819:PsiDirectoryNode" />
-              <item name="target" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -263,10 +260,10 @@
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.29285714" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.36666667" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.36666667" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19542067" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19542067" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -699,17 +696,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="319" column="74" selection-start-line="319" selection-start-column="74" selection-end-line="319" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Procfile">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret column="60" selection-start-column="60" selection-end-column="60" />
+          <caret column="36" selection-start-column="36" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="278" column="21" selection-start-line="278" selection-start-column="21" selection-end-line="278" selection-end-column="21" />
         </state>
       </provider>
     </entry>
