@@ -316,6 +316,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
+                            <addClasspath>true</addClasspath>
                             <mainClass>com.ml.weather.prediction.main.Main</mainClass>
                         </manifest>
                     </archive>

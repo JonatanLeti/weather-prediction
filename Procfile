@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT -jar ./target/fitme-app-1.0.0-SNAPSHOT-jar-with-dependencies.jar
+web: java -Dserver.port=$PORT -jar ./weather-prediction-main/target/weather-prediction-jl-2018-1.0.0-SNAPSHOT-jar-with-dependencies.jar
