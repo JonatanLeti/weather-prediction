@@ -16,6 +16,8 @@
         <!-- required by forbidden-api -->
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <start-class>com.ml.weather.prediction.main.Main</start-class>
+
 
         <!-- encoding -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -283,6 +285,20 @@
                 </configuration>
             </plugin>
             <plugin>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>./output</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                <groupId>com.google.appengine</groupId>
                <artifactId>appengine-maven-plugin</artifactId>
                <version>1.9.64</version>
@@ -310,19 +326,6 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>com.heroku.sdk</groupId>
-                <artifactId>heroku-maven-plugin</artifactId>
-                <version>2.0.4</version>
-                <configuration>
-                    <jdkVersion>1.8</jdkVersion>
-                    <appName>${artifactId}</appName>
-                    <processTypes>
-                        <web>java -Dserver.port=$PORT -jar ./target/${artifactId}-${version}-jar-with-dependencies.jar
-                        </web>
-                    </processTypes>
-                </configuration>
             </plugin>
         </plugins>
     </build>
