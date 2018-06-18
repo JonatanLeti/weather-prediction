@@ -65,6 +65,7 @@
         <h2.version>1.4.197</h2.version>
         <commons-collection.version>4.0</commons-collection.version>
         <logback.version>1.2.3</logback.version>
+        <appengine.target.version>1.9.54</appengine.target.version>
     </properties>
     <modules>
         <module>weather-prediction-main</module>
@@ -75,7 +76,7 @@
     </modules>
 
     <dependencyManagement>
-        <dependencies>
+        <dependencies>            
             <dependency>
                 <groupId>com.ml.weather.prediction</groupId>
                 <artifactId>weather-prediction-domain</artifactId>
@@ -100,6 +101,12 @@
                 <groupId>com.ml.weather.prediction</groupId>
                 <artifactId>weather-prediction-front</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+              <groupId>com.google.appengine</groupId>
+              <artifactId>appengine-api-1.0-sdk</artifactId>
+              <version>${appengine.target.version}</version>
             </dependency>
 
             <dependency>
